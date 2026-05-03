@@ -1,168 +1,84 @@
-# 📱 FIAP — React Native (Expo)
+# CP2 Mobile — Gerenciador de Produtos
 
-## Aula: Login + Navegação
-
-Este projeto foi desenvolvido em aula com o objetivo de ensinar os conceitos fundamentais de **React Native com Expo**, focando em:
-
-* Criação de projeto
-* Organização de pastas
-* Construção de telas
-* Navegação entre telas
-* Componentização básica
+Aplicativo mobile desenvolvido com Expo e React Native para cadastro, edição, exclusão e listagem de produtos, com autenticação via Firebase e leitura de código de barras.
 
 ---
 
-# 🎯 Objetivo
+## Tecnologias utilizadas
 
-Construir uma aplicação simples contendo:
-
-* Tela de Login
-* Tela de Cadastro
-* Tela de Recuperação de Senha
-* Tela Home
-* Navegação entre telas (Stack)
-
-> ⚠️ Este projeto NÃO possui backend.
-> O foco é **layout + navegação**.
+- **React Native** — framework para desenvolvimento mobile
+- **Expo** (~54) — plataforma de build e execução
+- **Firebase** — autenticação (Auth) e banco de dados (Firestore)
+- **expo-camera** — leitura de código de barras
+- **React Navigation** — navegação entre telas
 
 ---
 
-# 🧱 Tecnologias utilizadas
+## Funcionalidades principais
 
-* React Native
-* Expo (SDK 54)
-* React Navigation
+- Login, cadastro e recuperação de senha via Firebase Auth
+- Cadastro, edição e exclusão de produtos no Firestore
+- Leitura de código de barras pela câmera do dispositivo
+- Exibição de preços no padrão brasileiro (R$ 1.000,00)
+- Interface responsiva para telas pequenas
 
 ---
 
-# 🚀 Como executar o projeto
+## Melhorias implementadas
 
-## 1. Clonar o repositório
+1. **Formatação de preço no padrão brasileiro**
+   - Input aceita apenas dígitos; máscara aplicada automaticamente na exibição
+   - Preço armazenado como número no Firebase (`1050` centavos → `10.50`)
+   - Exibição formatada em toda a interface: `R$ 10,50`
+
+2. **Correção do teclado em telas pequenas**
+   - `KeyboardAvoidingView` com `behavior` correto para iOS (`padding`) e Android (`height`)
+   - `ScrollView` com `keyboardShouldPersistTaps="handled"` em todas as telas de formulário
+
+3. **Preservação de dados ao voltar do scanner**
+   - Nome e preço são passados como parâmetros ao navegar para o scanner
+   - Ao retornar, apenas o campo de código de barras é atualizado; os demais campos são restaurados
+
+4. **Melhoria de rolagem em telas pequenas**
+   - `FlatList` substituída por `ScrollView` com `contentContainerStyle={{ flexGrow: 1 }}` na HomeScreen
+   - Evita conflitos de scroll aninhado e garante acesso a todo o conteúdo
+
+5. **Correção do bug `window.confirm`**
+   - Substituído por `Alert.alert` com botões "Cancelar" e "Excluir" para confirmação de exclusão de produtos
+
+---
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+- Node.js 18+
+- Expo CLI: `npm install -g expo-cli`
+- Aplicativo **Expo Go** no celular (ou emulador Android/iOS)
+
+### Passos
 
 ```bash
-https://github.com/LuizCamilo-Mobile/FIAP-Project-Mobile-Example.git
-```
-
-## 2. Acessar a pasta
-
-```bash
-cd fiap-auth-app
-```
-
-## 3. Instalar dependências
-
-```bash
+# 1. Instalar dependências
 npm install
-```
 
-## 4. Rodar o projeto
-
-```bash
+# 2. Iniciar o projeto
 npx expo start
 ```
 
----
+Escaneie o QR code com o aplicativo Expo Go (Android) ou com a câmera (iOS).
 
-# 📦 Instalação manual (caso necessário)
+### Configuração do Firebase
 
-Se precisar recriar o projeto do zero:
+Edite o arquivo `src/firebase/config.js` com as credenciais do seu projeto Firebase:
 
-```bash
-npx create-expo-app fiap-auth-app --template blank@54
+```js
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_PROJETO.firebaseapp.com",
+  projectId: "SEU_PROJETO",
+  storageBucket: "SEU_PROJETO.appspot.com",
+  messagingSenderId: "SEU_SENDER_ID",
+  appId: "SEU_APP_ID",
+};
 ```
-
-Instalar navegação:
-
-```bash
-npm install @react-navigation/native
-npm install @react-navigation/native-stack
-npm install react-native-screens@4.16.0 --save-exact
-npx expo install react-native-safe-area-context
-```
-
----
-
-# 📁 Estrutura do projeto
-
-```text
-src/
-  components/
-  navigation/
-    AppNavigator.js
-  screens/
-    LoginScreen.js
-    RegisterScreen.js
-    ForgotPasswordScreen.js
-    HomeScreen.js
-```
-
----
-
-# 🧭 Fluxo de navegação
-
-* Login → Home
-* Login → Cadastro
-* Login → Esqueci minha senha
-* Cadastro → Voltar
-* Esqueci senha → Voltar
-* Home → Login
-
----
-
-# 📸 Telas do app
-
-* Login
-* Cadastro
-* Recuperação de senha
-* Home
-
----
-
-# 🧠 Conceitos abordados
-
-* `View`, `Text`, `TextInput`, `Button`
-* `TouchableOpacity`
-* `StyleSheet`
-* Navegação com Stack
-* Props e navegação (`navigation.navigate`)
-* Organização de projeto
-* Componentização básica
-
----
-
-# 🛠️ Problemas comuns
-
-## Erro: "expected dynamic type 'boolean', but had type 'string'"
-
-Solução aplicada:
-
-* Fixar versão:
-
-```bash
-npm install react-native-screens@4.16.0 --save-exact
-```
-
----
-
-# 🎯 Próximos passos
-
-* Melhorar layout (UI/UX)
-* Criar componentes reutilizáveis
-* Adicionar validação de formulário
-* Integrar com Firebase (login real)
-* Persistência de usuário
-
----
-
-# 🗣️ Observação final
-
-Este projeto tem fins educacionais e foi construído passo a passo em aula para facilitar o aprendizado dos alunos.
-
----
-
-# 👨‍🏫 Autor
-
-Projeto utilizado em aula — FIAP
-Professor: Luiz Camilo
-
----
