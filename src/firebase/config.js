@@ -7,13 +7,13 @@ import { getDatabase } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDp4jretVK7Hd273THN-fG7zkpCAjSuE4M",
-  authDomain: "cp2-mobile-f47d1.firebaseapp.com",
-  projectId: "cp2-mobile-f47d1",
-  databaseURL: 'https://cp2-mobile-f47d1-default-rtdb.firebaseio.com/', 
-  storageBucket: "cp2-mobile-f47d1.firebasestorage.app",
-  messagingSenderId: "445480862839",
-  appId: "1:445480862839:web:890ce894e1b810b2fcf272"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  databaseURL: '', 
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 
